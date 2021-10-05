@@ -1,7 +1,9 @@
 .header {
     grid-area: h;
-    background-color: green;
+    background-color: rgb(130, 214, 210);
   }
-  .header img {
-    width: 30px;
-  }
+h1{
+  display: inline;
+  padding-left: 5%;
+  color:rgba(76, 157, 189, 0.356);
+}
