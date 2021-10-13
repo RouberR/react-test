@@ -12,20 +12,18 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        // props.addPost();
-        props.dispatch(addPostActionCreator());
+        props.addPost();
 
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        // props.changeNewPostText(text)
-        props.dispatch(changeNewPostTextActionCreator(text))
+         props.changeNewPostText(text)
     }
 
+    let state = props.profilePage;
 
-
-    let postsElements = props.postData.postData.map(p => <Post message={p.message} likesCount={p.likesCount} />)
+    let postsElements = state.postData.map(p => <Post message={p.message} likesCount={p.likesCount} />)
 
     return (
         <div>
@@ -33,7 +31,7 @@ const MyPosts = (props) => {
 
                 <div className={css.MyPosts}>
                     My posts
-                    <div><textarea onChange={onPostChange} ref={newPostElement} value={props.postData.newPostText} /></div>
+                    <div><textarea onChange={onPostChange} ref={newPostElement} value={state.newPostText} /></div>
                     <div><button onClick={addPost}>Add post</button></div>
                 </div>
                 {postsElements}
