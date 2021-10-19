@@ -7,3 +7,7 @@ h1{
   padding-left: 5%;
   color:rgba(76, 157, 189, 0.356);
 }
+
+.loginBlock{
+  float: right;
+}
