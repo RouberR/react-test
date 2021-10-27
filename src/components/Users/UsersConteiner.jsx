@@ -10,6 +10,7 @@ import {
 import Users from "./Users";
 import Preloader from "../img/Preloader/Preloader";
 import { usersAPI } from "../../api/api";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
@@ -74,10 +75,13 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 */
-export default connect(mapStateToProps, {
+
+
+
+export default withAuthRedirect(connect(mapStateToProps, {
   follow,
   unfollow,
   setCurrentPage,
   tooglesIsFollowingProgress,
   getUsers,
-})(UsersAPIComponent);
+})(UsersAPIComponent));
