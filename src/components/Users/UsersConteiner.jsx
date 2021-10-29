@@ -11,8 +11,8 @@ import Users from "./Users";
 import Preloader from "../img/Preloader/Preloader";
 import { usersAPI } from "../../api/api";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-
-class UsersAPIComponent extends React.Component {
+import { compose } from "redux";
+class UsersComponent extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
@@ -78,10 +78,13 @@ let mapDispatchToProps = (dispatch) => {
 
 
 
-export default withAuthRedirect(connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setCurrentPage,
-  tooglesIsFollowingProgress,
-  getUsers,
-})(UsersAPIComponent));
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setCurrentPage,
+    tooglesIsFollowingProgress,
+    getUsers
+  })
+)(UsersComponent);

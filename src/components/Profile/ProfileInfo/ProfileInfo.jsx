@@ -1,6 +1,7 @@
 import React from "react";
 import Preloader from "../../img/Preloader/Preloader";
 import css from './ProfileInfo.module.css';
+import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props) => {
@@ -27,6 +28,7 @@ const ProfileInfo = (props) => {
 
       <h4>{props.profile.lookingForAJobDescription} </h4>
         ava + discripchen
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
       </div>
     </div>
   )
