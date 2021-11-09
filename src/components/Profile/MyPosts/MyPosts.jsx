@@ -1,14 +1,13 @@
 import css from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import React from "react";
-import { addPostActionCreator, changeNewPostTextActionCreator } from "../../../redux/profile-reducer";
 
 
 
 
 
-const MyPosts = (props) => {
-
+const MyPosts = React.memo(props => {
+    console.log('render')
     let newPostElement = React.createRef();
 
     let addPost = () => {
@@ -38,6 +37,6 @@ const MyPosts = (props) => {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts;
