@@ -9,7 +9,6 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../img/Preloader/Preloader";
-import { usersAPI } from "../../api/api";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 class UsersComponent extends React.Component {
@@ -51,31 +50,6 @@ let mapStateToProps = (state) => {
     followingInProgress: state.usersPage.followingInProgress,
   };
 };
-/*
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (usersId) => {
-            dispatch(followAC(usersId));
-        },
-        unfollow: (usersId) => {
-            dispatch(unfollowAC(usersId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber));
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountAC(totalCount));
-        },
-        toogleIsFetching: (isFetching) => {
-            dispatch(isFetchingAC(isFetching));
-        }
-    }
-}
-*/
-
 
 
 export default compose(
@@ -85,6 +59,6 @@ export default compose(
     unfollow,
     setCurrentPage,
     tooglesIsFollowingProgress,
-    getUsers
+    getUsers,
   })
 )(UsersComponent);
