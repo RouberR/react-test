@@ -22,7 +22,7 @@ const MyPosts = React.memo(props => {
 
     let state = props.profilePage;
 
-    let postsElements = state.postData.map(p => <Post message={p.message} likesCount={p.likesCount} />)
+    let postsElements = state.postData.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
 
     return (
         <div>
