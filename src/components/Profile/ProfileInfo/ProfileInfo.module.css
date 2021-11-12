@@ -4,3 +4,8 @@ img {
 .info{
     padding:10px;
 }
+
+.userPhoto{
+    width: 250px;
+    height: 300px;
+}

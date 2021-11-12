@@ -2,22 +2,26 @@ import React from "react";
 import Preloader from "../../img/Preloader/Preloader";
 import css from './ProfileInfo.module.css';
 import ProfileStatus from "./ProfileStatus";
-
+import userPhoto from "../../img/ani.png";
 
 const ProfileInfo = (props) => {
     if(!props.profile){
-      return <Preloader />
+      return <Preloader/>
     }
 
-
+const onMainPhotoSelecter = (e) => {
+  if (e.target.files.length){
+    props.savePhoto(e.target.files[0])
+  }
+}
   return (
     <div>
-      {/* <div className={css.content}><img src="https://cdn2.channelpro.co.uk/sites/channelpro/files/2019/03/global_network.jpg" /></div> */}
       <div className={css.info}>
 
       <h4>{props.profile.aboutMe}</h4>
 
-      <img src={props.profile.photos.large} alt="Photos"/>
+      <img src={props.profile.photos.large || userPhoto} className={css.userPhoto} alt="Photos"/>
+     { props.isOwner && <input type={"file"} onChange={onMainPhotoSelecter}/>}
       <h3>{props.profile.fullName}</h3>
 
       <p>{props.profile.contacts.vk}</p>
