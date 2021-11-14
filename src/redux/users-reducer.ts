@@ -8,7 +8,16 @@ const SET_USER_TOTAL_COUNT = "SET_USER_TOTAL_COUNT";
 const TOOGL_IS_FETCHING = "TOOGL_IS_FETCHING";
 const TOOGL_IS_FOLLOWING_PROGRESS = "TOOGL_IS_FOLLOWING_PROGRESS";
 
-let init = {
+type initType = {
+  users: any
+  pageSize: number
+  totalUsersCount: number
+  currentPage: number
+  isFetching: boolean
+  followingInProgress: any
+}
+
+let init: initType  = {
   users: [],
   pageSize: 10,
   totalUsersCount: 0,
@@ -17,12 +26,12 @@ let init = {
   followingInProgress: [],
 };
 
-const usersReducer = (state = init, action) => {
+const usersReducer = (state = init, action:any) => {
   switch (action.type) {
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
+        users: state.users.map((u:any) => {
           if (u.id === action.userId) {
             return { ...u, followed: true };
           }
@@ -32,7 +41,7 @@ const usersReducer = (state = init, action) => {
     case UNFOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
+        users: state.users.map((u:any) => {
           if (u.id === action.userId) {
             return { ...u, followed: false };
           }
@@ -64,7 +73,7 @@ const usersReducer = (state = init, action) => {
         ...state,
         followingInProgress: action.followingInProgress
           ? [...state.followingInProgress, action.userId]
-          : state.followingInProgress.filter((id) => id !== action.userId),
+          : state.followingInProgress.filter((id:number) => id !== action.userId),
       };
     }
     default:
@@ -72,57 +81,57 @@ const usersReducer = (state = init, action) => {
   }
 };
 
-export const followSuccess = (userId) => ({
+export const followSuccess = (userId:number) => ({
   type: FOLLOW,
   userId,
 });
 
-export const unfollowSuccess = (userId) => ({
+export const unfollowSuccess = (userId:number) => ({
   type: UNFOLLOW,
   userId,
 });
 
-export const setUsers = (users) => ({
+export const setUsers = (users:any) => ({
   type: SET_USERS,
   users,
 });
 
-export const setCurrentPage = (currentPage) => ({
+export const setCurrentPage = (currentPage:number) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
 
-export const setTotalUsersCount = (totalUsersCount) => ({
+export const setTotalUsersCount = (totalUsersCount:number) => ({
   type: SET_USER_TOTAL_COUNT,
   totalCount: totalUsersCount,
 });
 
-export const toogleIsFetching = (isFetching) => ({
+export const toogleIsFetching = (isFetching:boolean) => ({
   type: TOOGL_IS_FETCHING,
   isFetching,
 });
 
-export const tooglesIsFollowingProgress = (followingInProgress, userId) => ({
+export const tooglesIsFollowingProgress = (followingInProgress:any, userId:number) => ({
   type: TOOGL_IS_FOLLOWING_PROGRESS,
   followingInProgress,
   userId,
 });
 
-export const getUsers = (currentPage, pageSize) => {
-  return async (dispatch) => {
+export const getUsers = (currentPage:number, pageSize:number) => {
+  return async (dispatch:any) => {
     dispatch(toogleIsFetching(true));
-    let data = await usersAPI.getUsers(currentPage, pageSize);
+    let data:any = await usersAPI.getUsers(currentPage, pageSize);
     dispatch(toogleIsFetching(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsersCount(data.totalCount));
   };
 };
 
-const followUnfollow = async (
-  dispatch,
-  userId,
-  usersAPIMetod,
-  actionCreater
+const followUnfollow =  async (
+  dispatch:any,
+  userId:number,
+  usersAPIMetod:any,
+  actionCreater:any
 ) => {
   dispatch(tooglesIsFollowingProgress(true, userId));
   let response = await usersAPIMetod;
@@ -132,8 +141,8 @@ const followUnfollow = async (
   dispatch(tooglesIsFollowingProgress(false, userId));
 };
 
-export const follow = (userId) => {
-  return async (dispatch) => {
+export const follow = (userId:number) => {
+  return async (dispatch:any) => {
     followUnfollow(
       dispatch,
       userId,
@@ -143,8 +152,8 @@ export const follow = (userId) => {
   };
 };
 
-export const unfollow = (userId) => {
-  return async (dispatch) => {
+export const unfollow = (userId:number) => {
+  return async (dispatch:any) => {
     followUnfollow(
       dispatch,
       userId,
